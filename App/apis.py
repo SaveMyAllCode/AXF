@@ -42,6 +42,9 @@ class Market(Resource):
     def get(self):
         foodtypes = axf_foodtypes.query.all()
         typeid = session.get("typeid") or '104749'
+        sort = session.get('sort') or 0
+        childtypenames = session.get('childtypenames') or 0
+
         # 左侧导航获得所有商品的类型
         list=[]
         for i in foodtypes:
@@ -50,7 +53,17 @@ class Market(Resource):
         # 获得目前类型的商品
         list2= []
         print('******')
-        goodslist = axf_goods.query.filter(axf_goods.categoryid == typeid)
+        if sort == '1':
+            goodslist = axf_goods.query.filter(axf_goods.categoryid == typeid).order_by('price')
+        if sort == '2':
+            goodslist = axf_goods.query.filter(axf_goods.categoryid == typeid).order_by('-price')
+        if sort == '3':
+            goodslist = axf_goods.query.filter(axf_goods.categoryid == typeid).order_by('productnum')
+        else:
+            goodslist = axf_goods.query.filter(axf_goods.categoryid == typeid)
+
+        if childtypenames != 0:
+            goodslist = goodslist.filter(goodslist.childcid == childtypenames)
         print(goodslist)
         for j in goodslist:
             goods = j.axf_foods_dict()
@@ -73,3 +86,37 @@ class Market(Resource):
         }
 
         return jsonify(data)
+
+    def put(self):
+        typeid = request.form.get('typeid')
+        data = {
+            'code':200
+        }
+        if not typeid:
+            data['code']=400
+            return jsonify(data)
+        session['typeid'] = typeid
+        return jsonify(data)
+
+    def post(self):
+        log = request.form.get('log')
+        data = {
+            'code':200
+        }
+        if int(log) == 1:
+            goodsid = request.form.get('goodsid')
+            return jsonify(data)
+        if int(log) == -1:
+            goodsid = request.form.get('goodsid')
+            return jsonify(data)
+        if int(log) == 0:
+            sort = request.form.get('sort')
+            session['sort'] = sort
+            return jsonify(data)
+        data['code'] = 400
+        return jsonify(data)
+
+
+
+
+

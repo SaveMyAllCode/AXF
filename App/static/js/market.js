@@ -41,24 +41,51 @@ $(function () {
                 $('#alltypes div').append(a)
             }
         }
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
 
     $('#alltypes').hide();
     $('#zhsort').hide();
+
+
+    $('base ul').on('click','li .id',function () {
+        var typeid = $(this).attr('typeid');
+        $.ajax({
+            url:'/market/',
+            type: 'PUT',
+            data:{
+                'typeid':typeid
+            },
+            success:function (data) {
+                if(data.code==200){
+                    window.location.href='market.html';
+                }
+                else{
+                    alert('出错')
+                }
+
+            }
+        });
+    });
+    $('.sort').click(function () {
+        var sortid = $(this).attr('sortid')
+        $.ajax({
+            url:'/market/',
+            type:'POST',
+            data:{
+                'sort':sortid,
+                'log':0,
+            },
+            success:function (data) {
+                if(data.code==200){
+                    window.location.href='market.html'
+                }
+                else{
+                    alert('报错')
+                }
+            }
+        })
+    })
+
 
     //点击全部类型的展示全部类型的ｄｉｖ
     $('#alltypespan').click(function(){
@@ -87,7 +114,7 @@ $(function () {
         $('#zhsortspan').removeClass('glyphicon glyphicon-chevron-up').addClass('glyphicon glyphicon-chevron-down')
     });
     //添加点击事件
-    $('.addShopping').click(function () {
+    $('.addShopping').onclick(function () {
         // alert($(this).attr('goodsid'));
         goodsid = $(this).attr('goodsid')
         //获取按钮上面的标签
@@ -95,10 +122,13 @@ $(function () {
         $.ajax({
             url:'/addshopcar/',
             type:'post',
-            data:{'goodsid':goodsid},
+            data:{
+                'goodsid':goodsid,
+                'log': 1,
+            },
             success:function (result) {
                 if(result.code == '0009'){
-                    window.location.href='/login/';
+                    window.location.href='login.html';
                 }else {
                     objects.html(result.num)
                 }
@@ -107,17 +137,20 @@ $(function () {
 
         });
     });
-    $('.subShopping').click(function () {
+    $('.subShopping').onclick(function () {
         // alert($(this).attr('goodsid'));
         goodsid = $(this).attr('goodsid')
 
         $.ajax({
             url:'/subshopcar/',
             type:'post',
-            data:{'goodsid':goodsid},
+            data:{
+                'goodsid':goodsid,
+                'log': -1,
+            },
             success:function (result) {
                 if(result.code == '0009'){
-                    window.location.href='/login/';
+                    window.location.href='login.html';
                 }else{
                     gid = '#' + goodsid
                     $(gid).html(result.num)
