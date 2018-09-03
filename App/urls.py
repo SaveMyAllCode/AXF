@@ -1,7 +1,7 @@
 from flask_restful import Api
 
 from App.apis import Login, Regist, Shopcar
-from App.model import Base
+
 
 api = Api()
 
