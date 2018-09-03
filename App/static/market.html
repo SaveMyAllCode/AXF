@@ -3,12 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link type="text/css" rel="stylesheet" href='css/swiper.css'">
-    <link type="text/css" rel="stylesheet" href='css/bootstrap.css'">
+    <link type="text/css" rel="stylesheet" href='css/swiper.css'>
+    <link type="text/css" rel="stylesheet" href='css/bootstrap.css'>
     <link type="text/css" rel="stylesheet" href='css/reset.css'>
     <link type="text/css" rel="stylesheet" href='css/base.css'>
+    <link type="text/css" rel="stylesheet" href='css/market.css'>
+    <script type="text/javascript" src='js/jquery.js'></script>
+    <script type="text/javascript" src='js/swiper.js'></script>
+    <script type="text/javascript" src='js/bootstrap.js'></script>
+    <script type="text/javascript" src='js/base.js'></script>
+    <script type="text/javascript" src='js/market.js'></script>
 </head>
 <body>
+<header></header>
+ <div id="market">
+        {# 左边导航 #}
+        <aside>
+            <ul>
 
+            </ul>
+        </aside>
+        <section>
+            <nav>
+                <ul>
+                    <li>
+                        <sapn >全部类型<span id="alltypespan" class="glyphicon glyphicon-chevron-down"></span></sapn>
+                    </li>
+                    <li>
+                        <span >综合排序<span id="zhsortspan" class="glyphicon glyphicon-chevron-down"></span></span>
+                    </li>
+                </ul>
+            </nav>
+
+            <menu>
+                <ul>
+
+                </ul>
+
+                <div id="alltypes">
+                    <div >
+
+                    </div>
+                </div>
+{#              综合排序#}
+                <div id="zhsort">
+                    <div >
+                        <a href="/market/">
+                            <span>
+                                综合排序
+                            </span>
+                        </a>
+                        <a href="/market_by_typeid/{{ typeid }}/1/{{ childtypenames }}/">
+                            <span>
+                                价格升序
+                            </span>
+                        </a>
+                        <a href="/market_by_typeid/{{ typeid }}/2/{{ childtypenames }}/">
+                            <span>
+                                价格降序
+                            </span>
+                        </a>
+                        <a  href="/market_by_typeid/{{ typeid }}/3/{{ childtypenames }}/">
+                            <span>
+                                销量排序
+                            </span>
+                        </a>
+
+
+
+
+                    </div>
+                </div>
+            </menu>
+
+        </section>
+    </div>
+
+
+
+
+
+<footer>
+
+        <a href="#"  class="home">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>主页</dd>
+            </dl>
+
+        </a>
+
+        <a href="#" class="market">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>闪购</dd>
+            </dl>
+        </a>
+
+        <a href="#" class="cart">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>购物车</dd>
+            </dl>
+        </a>
+
+        <a href="#" class="minet">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>我的</dd>
+            </dl>
+        </a>
+
+
+    </footer>
 </body>
 </html>
