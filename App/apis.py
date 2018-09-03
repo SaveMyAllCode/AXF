@@ -26,7 +26,7 @@ class Shopcar(Resource):
 
 
 # 订单
-class Orede(Resource):
+class Order(Resource):
     pass
 
 
